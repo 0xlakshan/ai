@@ -73,10 +73,7 @@ export class CohereEmbeddingModel implements EmbeddingModelV3 {
       headers: combineHeaders(this.config.headers(), headers),
       body: {
         model: this.modelId,
-        // The AI SDK only supports 'float' embeddings which are also the only ones
-        // the Cohere API docs state are supported for all models.
-        // https://docs.cohere.com/v2/reference/embed#request.body.embedding_types
-        embedding_types: ['float'],
+        embedding_types: embeddingOptions?.embeddingTypes ?? ['float'],
         texts: values,
         input_type: embeddingOptions?.inputType ?? 'search_query',
         truncate: embeddingOptions?.truncate,
